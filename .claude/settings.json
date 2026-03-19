@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/elnatal/Documents/**)",
+      "Bash(ls /Users/elnatal/Documents/next-shadcn-dashboard-starter/src/app/\\\\\\(auth\\\\\\))",
+      "Bash(ls /Users/elnatal/Documents/next-shadcn-dashboard-starter/src/app/\\\\\\(auth\\\\\\)/\\\\\\(signin\\\\\\))",
+      "Bash(ls /Users/elnatal/Documents/next-shadcn-dashboard-starter/src/app/dashboard/product/[productId])",
+      "Bash(npx create-next-app@14 . --typescript --tailwind --app --src-dir --import-alias \"@/*\" --no-eslint --use-npm)"
+    ]
+  }
+}
