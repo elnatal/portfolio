@@ -5,6 +5,8 @@ import { CVDocument } from "@/lib/cv-pdf";
 import type { CVData } from "@/lib/cv-pdf";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+export const maxDuration = 30;
 
 export async function GET() {
   const [info, experiences, education, certifications, languages, skills, projects] = await Promise.all([
@@ -31,7 +33,7 @@ export async function GET() {
 
   const filename = `${info.name.toLowerCase().replace(/\s+/g, "-")}-cv.pdf`;
 
-  return new Response(buffer as unknown as BodyInit, {
+  return new Response(new Uint8Array(buffer), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="${filename}"`,
