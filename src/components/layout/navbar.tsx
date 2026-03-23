@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, createElement } from "react";
 import { cn } from "@/lib/utils";
-import { Download, Menu, X } from "lucide-react";
+import { Download, Loader2, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -15,10 +15,38 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+async function downloadCV() {
+  const [{ pdf }, { CVDocument }, res] = await Promise.all([
+    import("@react-pdf/renderer"),
+    import("@/lib/cv-pdf"),
+    fetch("/api/cv-data"),
+  ]);
+
+  const data = await res.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const blob = await pdf(createElement(CVDocument, { data }) as any).toBlob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${data.info.name.toLowerCase().replace(/\s+/g, "-")}-cv.pdf`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cvLoading, setCvLoading] = useState(false);
+
+  async function handleDownloadCV() {
+    setCvLoading(true);
+    try {
+      await downloadCV();
+    } finally {
+      setCvLoading(false);
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,14 +106,14 @@ export function Navbar() {
         </ul>
 
         {/* Download CV — desktop */}
-        <a
-          href="/api/cv"
-          download
-          className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200"
+        <button
+          onClick={handleDownloadCV}
+          disabled={cvLoading}
+          className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
         >
-          <Download className="size-3.5" />
+          {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
           CV
-        </a>
+        </button>
 
         {/* Mobile menu button */}
         <button
