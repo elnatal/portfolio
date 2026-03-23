@@ -22,6 +22,28 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Elnatal Debebe",
+            url: "https://elnatal.com",
+            jobTitle: "Lead Software Engineer",
+            worksFor: { "@type": "Organization", name: "Kifiya" },
+            email: "elnataldebebe@gmail.com",
+            address: { "@type": "PostalAddress", addressLocality: "Addis Ababa", addressCountry: "ET" },
+            sameAs: ["https://github.com/elnatal", "https://linkedin.com/in/elnatal"],
+            knowsAbout: [
+              "JavaScript", "TypeScript", "Go", "Python", "Node.js", "Next.js",
+              "Vue.js", "Nuxt.js", "Flutter", "PostgreSQL", "MySQL", "MongoDB",
+              "AWS", "Docker", "Kubernetes", "Microservices", "Software Architecture",
+            ],
+            description: "Software Engineer & Full-Stack Developer with 6+ years of experience building scalable systems, marketplaces, and healthcare platforms.",
+          }),
+        }}
+      />
       <Navbar />
       <HeroSection info={personalInfo} />
       <ExperienceSection experiences={experiences} />

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github, Star, Layers, ArrowRight } from "lucide-react";
@@ -8,6 +9,8 @@ import { ProjectGallery } from "@/components/portfolio/project-gallery";
 interface ProjectPageProps {
   params: Promise<{ id: string }>;
 }
+
+const SITE_URL = "https://elnatal.com";
 
 function parseTags(raw: string | null): string[] {
   if (!raw) return [];
@@ -25,6 +28,44 @@ function isHtml(str: string) {
 
 function stripHtml(str: string) {
   return str.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { id: rawId } = await params;
+  const id = Number(rawId);
+  if (isNaN(id)) return {};
+
+  const project = await prisma.project.findUnique({ where: { id } });
+  if (!project) return {};
+
+  const tags = parseTags(project.tags);
+  const images = parseTags(project.images);
+  const plainDescription =
+    project.summary ??
+    (project.description ? stripHtml(project.description).slice(0, 160) : null) ??
+    "A project by Elnatal Debebe";
+  const ogImage = images[0] ?? "/opengraph-image";
+  const canonicalUrl = `${SITE_URL}/projects/${id}`;
+
+  return {
+    title: project.name,
+    description: plainDescription,
+    keywords: tags.length > 0 ? tags : undefined,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      type: "article",
+      url: canonicalUrl,
+      title: project.name,
+      description: plainDescription,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: project.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.name,
+      description: plainDescription,
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
@@ -53,6 +94,23 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: project.name,
+            description: project.summary ?? stripHtml(project.description ?? ""),
+            url: project.liveUrl ?? `${SITE_URL}/projects/${project.id}`,
+            codeRepository: project.githubUrl ?? undefined,
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Web",
+            author: { "@type": "Person", name: "Elnatal Debebe", url: SITE_URL },
+            keywords: parseTags(project.tags).join(", "),
+          }),
+        }}
+      />
       {/* ── Hero ────────────────────────────────────────────── */}
       <div className="relative overflow-hidden border-b border-gray-200">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(124,58,237,0.08),transparent)]" />
