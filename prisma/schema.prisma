@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model PersonalInfo {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String
+  bio       String
+  email     String
+  phone     String
+  website   String
+  location  String
+  github    String?
+  linkedin  String?
+  twitter   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Experience {
+  id          Int      @id @default(autoincrement())
+  company     String
+  role        String
+  type        String?
+  startDate   String
+  endDate     String?
+  isCurrent   Boolean  @default(false)
+  location    String
+  description String?
+  order       Int      @default(0)
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  summary     String?
+  description String?
+  tags        String   @default("[]")
+  images      String   @default("[]")
+  liveUrl     String?
+  githubUrl   String?
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Skill {
+  id        Int      @id @default(autoincrement())
+  name      String
+  category  String
+  order     Int      @default(0)
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Education {
+  id          Int      @id @default(autoincrement())
+  institution String
+  degree      String
+  field       String
+  startYear   String
+  endYear     String?
+  isCurrent   Boolean  @default(false)
+  description String?
+  order       Int      @default(0)
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Language {
+  id                Int      @id @default(autoincrement())
+  name              String
+  isMother          Boolean  @default(false)
+  listening         String?  // CEFR: A1 A2 B1 B2 C1 C2 (null for mother tongue)
+  reading           String?
+  writing           String?
+  spokenProduction  String?
+  spokenInteraction String?
+  order             Int      @default(0)
+  visible           Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Certification {
+  id            Int      @id @default(autoincrement())
+  name          String
+  issuer        String
+  issueDate     String
+  expiryDate    String?
+  credentialId  String?
+  credentialUrl String?
+  imageUrl      String?
+  visible       Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
