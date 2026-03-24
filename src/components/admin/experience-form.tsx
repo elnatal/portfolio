@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/admin/rich-text-editor";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -244,15 +244,17 @@ export function ExperienceForm({ experience }: ExperienceFormProps) {
 
       {/* Description */}
       <div className="space-y-1.5">
-        <Label htmlFor="description" className="text-gray-300">
-          Description
-        </Label>
-        <Textarea
-          id="description"
-          {...register("description")}
-          placeholder="Describe your role and responsibilities..."
-          rows={4}
-          className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus:border-violet-500 resize-none"
+        <Label className="text-gray-300">Description</Label>
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <RichTextEditor
+              value={field.value}
+              onChange={field.onChange}
+              placeholder="Describe your role and responsibilities..."
+            />
+          )}
         />
       </div>
 

@@ -130,9 +130,21 @@ export function ExperienceSection({
                   </div>
 
                   {exp.description && (
-                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                      {exp.description}
-                    </p>
+                    <div
+                      className="
+                        text-sm leading-relaxed
+                        [&_p]:text-muted-foreground [&_p]:leading-relaxed [&_p]:mt-2 first:[&_p]:mt-0
+                        [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mt-2 [&_ul]:space-y-1
+                        [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mt-2 [&_ol]:space-y-1
+                        [&_li]:text-muted-foreground [&_li]:leading-relaxed
+                        [&_strong]:text-foreground [&_strong]:font-semibold
+                        [&_h2]:text-foreground [&_h2]:font-semibold [&_h2]:text-sm [&_h2]:mt-3
+                        [&_h3]:text-foreground [&_h3]:font-medium [&_h3]:text-sm [&_h3]:mt-2
+                        [&_a]:text-violet-400 [&_a]:underline [&_a:hover]:text-violet-300
+                        [&_hr]:border-border [&_hr]:my-3
+                      "
+                      dangerouslySetInnerHTML={{ __html: exp.description }}
+                    />
                   )}
                 </div>
               </motion.div>
