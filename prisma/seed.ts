@@ -16,7 +16,7 @@ async function main() {
     where: { id: 1 },
     update: {
       title: "Lead Software Engineer / Full-Stack Engineer",
-      bio: "Software Engineer focused on designing and scaling distributed systems in high-stakes environments across fintech, healthcare, and SaaS. Experienced in building microservices architectures, optimizing performance bottlenecks, and delivering systems that handle large-scale, real-world workloads. Known for taking ownership of system design, improving reliability, and translating complex requirements into production-ready solutions.",
+      bio: "Software Engineer specializing in designing and scaling distributed systems across fintech, healthcare, and SaaS. Focused on microservices architecture, performance optimization, and delivering reliable systems at production scale.",
       github: "https://github.com/elnatal",
       linkedin: "https://www.linkedin.com/in/elnatal-debebe-98143b174",
       twitter: null
@@ -24,7 +24,7 @@ async function main() {
     create: {
       name: "Elnatal Debebe",
       title: "Lead Software Engineer / Full-Stack Engineer",
-      bio: "Software Engineer focused on designing and scaling distributed systems in high-stakes environments across fintech, healthcare, and SaaS. Experienced in building microservices architectures, optimizing performance bottlenecks, and delivering systems that handle large-scale, real-world workloads. Known for taking ownership of system design, improving reliability, and translating complex requirements into production-ready solutions.",
+      bio: "Software Engineer specializing in designing and scaling distributed systems across fintech, healthcare, and SaaS. Focused on microservices architecture, performance optimization, and delivering reliable systems at production scale.",
       email: "elnataldebebe@gmail.com",
       phone: "+251 911148312",
       website: "https://elnatal.com",

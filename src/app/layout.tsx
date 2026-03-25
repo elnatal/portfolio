@@ -18,34 +18,52 @@ const jetbrainsMono = JetBrains_Mono({
 const SITE_URL = "https://elnatal.com";
 const OWNER_NAME = "Elnatal Debebe";
 const OWNER_TITLE = "Lead Software Engineer";
+const OWNER_LOCATION = "Addis Ababa, Ethiopia";
 const SITE_DESCRIPTION =
-  "Software Engineer & Full-Stack Developer with 7+ years of experience building scalable systems, marketplaces, and healthcare platforms. Passionate about clean architecture, microservices, and delivering impactful software.";
+  "Software Engineer specializing in designing and scaling distributed systems across fintech, healthcare, and SaaS. Focused on microservices architecture, performance optimization, and delivering reliable systems at production scale.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${OWNER_NAME} — ${OWNER_TITLE}`,
+    default: `${OWNER_NAME} — ${OWNER_TITLE} | ${OWNER_LOCATION}`,
     template: `%s | ${OWNER_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
     "Elnatal Debebe",
+    // role
     "Lead Software Engineer",
+    "Senior Software Engineer",
     "Full-Stack Developer",
+    "Backend Developer",
+    "Software Developer",
+    "Web Developer",
+    // role + location
+    "Software Engineer Ethiopia",
+    "Software Developer Ethiopia",
+    "Full Stack Developer Ethiopia",
+    "Backend Developer Ethiopia",
+    "Web Developer Ethiopia",
+    "Software Engineer Addis Ababa",
+    "Developer Addis Ababa",
+    "Programmer Ethiopia",
+    // tech
     "Go",
     "Golang",
     "TypeScript",
     "JavaScript",
     "Node.js",
-    "Software Engineer Ethiopia",
-    "Addis Ababa developer",
-    "microservices",
-    "scalable systems",
     "Next.js",
     "PostgreSQL",
     "Docker",
-    "Kubernetes",
     "AWS",
+    "GraphQL",
+    "microservices",
+    "distributed systems",
+    "fintech",
+    // location
+    "Ethiopia tech",
+    "Addis Ababa",
   ],
   authors: [{ name: OWNER_NAME, url: SITE_URL }],
   creator: OWNER_NAME,
@@ -55,7 +73,7 @@ export const metadata: Metadata = {
     type: "profile",
     url: SITE_URL,
     siteName: `${OWNER_NAME} — Portfolio`,
-    title: `${OWNER_NAME} — ${OWNER_TITLE}`,
+    title: `${OWNER_NAME} — ${OWNER_TITLE} | ${OWNER_LOCATION}`,
     description: SITE_DESCRIPTION,
     locale: "en_US",
     firstName: "Elnatal",
@@ -64,9 +82,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${OWNER_NAME} — ${OWNER_TITLE}`,
+    title: `${OWNER_NAME} — ${OWNER_TITLE} | ${OWNER_LOCATION}`,
     description: SITE_DESCRIPTION,
     creator: "@elnatal",
+  },
+  other: {
+    "geo.region": "ET-AA",
+    "geo.placename": "Addis Ababa, Ethiopia",
+    "geo.position": "9.0348;38.7507",
+    "ICBM": "9.0348, 38.7507",
   },
   robots: {
     index: true,

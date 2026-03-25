@@ -15,6 +15,10 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+function fileDate() {
+  return new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+}
+
 async function downloadCV() {
   const [{ pdf }, { CVDocument }, res] = await Promise.all([
     import("@react-pdf/renderer"),
@@ -28,7 +32,25 @@ async function downloadCV() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${data.info.name.toLowerCase().replace(/\s+/g, "-")}-cv.pdf`;
+  a.download = `${data.info.name.toLowerCase().replace(/\s+/g, "-")}-cv-${fileDate()}.pdf`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function downloadResume() {
+  const [{ pdf }, { ResumeDocument }, res] = await Promise.all([
+    import("@react-pdf/renderer"),
+    import("@/lib/resume-pdf"),
+    fetch("/api/cv-data"),
+  ]);
+
+  const data = await res.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const blob = await pdf(createElement(ResumeDocument, { data }) as any).toBlob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `${data.info.name.toLowerCase().replace(/\s+/g, "-")}-resume-${fileDate()}.pdf`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -38,6 +60,7 @@ export function Navbar() {
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [cvLoading, setCvLoading] = useState(false);
+  const [resumeLoading, setResumeLoading] = useState(false);
 
   async function handleDownloadCV() {
     setCvLoading(true);
@@ -45,6 +68,15 @@ export function Navbar() {
       await downloadCV();
     } finally {
       setCvLoading(false);
+    }
+  }
+
+  async function handleDownloadResume() {
+    setResumeLoading(true);
+    try {
+      await downloadResume();
+    } finally {
+      setResumeLoading(false);
     }
   }
 
@@ -105,15 +137,25 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* Download CV — desktop */}
-        <button
-          onClick={handleDownloadCV}
-          disabled={cvLoading}
-          className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
-        >
-          {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
-          CV
-        </button>
+        {/* Download buttons — desktop */}
+        <div className="hidden md:flex items-center gap-1">
+          <button
+            onClick={handleDownloadResume}
+            disabled={resumeLoading}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+          >
+            {resumeLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
+            Resume
+          </button>
+          <button
+            onClick={handleDownloadCV}
+            disabled={cvLoading}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+          >
+            {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
+            CV
+          </button>
+        </div>
 
         {/* Mobile menu button */}
         <button
@@ -144,6 +186,24 @@ export function Navbar() {
                 </a>
               </li>
             ))}
+            <li className="flex gap-2 pt-1 border-t border-border mt-1">
+              <button
+                onClick={() => { handleDownloadResume(); setMenuOpen(false); }}
+                disabled={resumeLoading}
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+              >
+                {resumeLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
+                Resume
+              </button>
+              <button
+                onClick={() => { handleDownloadCV(); setMenuOpen(false); }}
+                disabled={cvLoading}
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+              >
+                {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
+                CV
+              </button>
+            </li>
           </ul>
         </div>
       )}

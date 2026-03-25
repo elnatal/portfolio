@@ -86,7 +86,7 @@ export default function Image() {
             letterSpacing: "-0.5px",
           }}
         >
-          Lead Software Engineer · Full-Stack Developer · 6+ yrs
+          Lead Software Engineer · Full-Stack Developer
         </div>
 
         {/* Tech badges */}
