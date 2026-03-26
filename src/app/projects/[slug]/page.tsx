@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 
 interface ProjectPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 const SITE_URL = "https://elnatal.com";
@@ -31,11 +31,9 @@ function stripHtml(str: string) {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { id: rawId } = await params;
-  const id = Number(rawId);
-  if (isNaN(id)) return {};
+  const { slug } = await params;
 
-  const project = await prisma.project.findUnique({ where: { id } });
+  const project = await prisma.project.findUnique({ where: { slug } });
   if (!project) return {};
 
   const tags = parseTags(project.tags);
@@ -45,7 +43,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     (project.description ? stripHtml(project.description).slice(0, 160) : null) ??
     "A project by Elnatal Debebe";
   const ogImage = images[0] ?? "/opengraph-image";
-  const canonicalUrl = `${SITE_URL}/projects/${id}`;
+  const canonicalUrl = `${SITE_URL}/projects/${slug}`;
 
   return {
     title: project.name,
@@ -69,14 +67,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { id: rawId } = await params;
-  const id = Number(rawId);
-  if (isNaN(id)) notFound();
+  const { slug } = await params;
 
   const [project, related] = await Promise.all([
-    prisma.project.findUnique({ where: { id } }),
+    prisma.project.findUnique({ where: { slug } }),
     prisma.project.findMany({
-      where: { id: { not: id } },
+      where: { slug: { not: slug } },
       orderBy: [{ featured: "desc" }, { order: "asc" }],
       take: 3,
     }),
@@ -102,7 +98,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             "@type": "SoftwareApplication",
             name: project.name,
             description: project.summary ?? stripHtml(project.description ?? ""),
-            url: project.liveUrl ?? `${SITE_URL}/projects/${project.id}`,
+            url: project.liveUrl ?? `${SITE_URL}/projects/${project.slug}`,
             codeRepository: project.githubUrl ?? undefined,
             applicationCategory: "DeveloperApplication",
             operatingSystem: "Web",
@@ -293,7 +289,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 return (
                   <Link
                     key={p.id}
-                    href={`/projects/${p.id}`}
+                    href={`/projects/${p.slug}`}
                     className="group flex flex-col rounded-xl border border-gray-200 bg-white p-5 hover:border-violet-200 hover:shadow-sm transition-all"
                   >
                     <div className="flex items-center justify-between mb-2">

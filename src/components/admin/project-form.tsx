@@ -14,6 +14,7 @@ import { RichTextEditor } from "@/components/admin/rich-text-editor";
 
 interface ProjectFormData {
   name: string;
+  slug: string;
   summary: string;
   description: string;
   tags: string;
@@ -28,6 +29,7 @@ interface ProjectFormData {
 interface Project {
   id: number;
   name: string;
+  slug: string;
   summary: string | null;
   description: string | null;
   tags: string;
@@ -75,6 +77,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
   } = useForm<ProjectFormData>({
     defaultValues: {
       name: project?.name ?? "",
+      slug: project?.slug ?? "",
       summary: project?.summary ?? "",
       description: project?.description ?? "",
       tags: parsedTags,
@@ -95,6 +98,7 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
     const payload = {
       ...data,
+      slug: data.slug.trim() || undefined,
       summary: data.summary || null,
       tags: JSON.stringify(tagsArray),
       order: Number(data.order),
@@ -144,6 +148,25 @@ export function ProjectForm({ project }: ProjectFormProps) {
         {errors.name && (
           <p className="text-red-400 text-xs">{errors.name.message}</p>
         )}
+      </div>
+
+      {/* Slug */}
+      <div className="space-y-1.5">
+        <Label htmlFor="slug" className="text-gray-300">
+          URL Slug
+          <span className="text-gray-500 text-xs font-normal ml-2">
+            — leave blank to auto-generate from name
+          </span>
+        </Label>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500 text-sm shrink-0">/projects/</span>
+          <Input
+            id="slug"
+            {...register("slug")}
+            placeholder="my-cool-project"
+            className="bg-white/5 border-white/10 text-white placeholder:text-zinc-500 focus:border-violet-500"
+          />
+        </div>
       </div>
 
       {/* Summary */}

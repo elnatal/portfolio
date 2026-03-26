@@ -6,7 +6,7 @@ const SITE_URL = "https://elnatal.com";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projects = await prisma.project.findMany({
     where: { visible: true },
-    select: { id: true, updatedAt: true },
+    select: { slug: true, updatedAt: true },
     orderBy: { order: "asc" },
   });
 
@@ -18,7 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     ...projects.map((p) => ({
-      url: `${SITE_URL}/projects/${p.id}`,
+      url: `${SITE_URL}/projects/${p.slug}`,
       lastModified: p.updatedAt,
       changeFrequency: "monthly" as const,
       priority: 0.8,

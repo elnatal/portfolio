@@ -157,6 +157,7 @@ async function main() {
     {
       id: 9,
       name: "Loan Collection Platform",
+      slug: "loan-collection-platform",
       summary: "High-scale loan collection system processing ~500K daily transactions with asynchronous pipelines, real-time tracking, and pluggable integrations across multiple financial data sources.",
       description: "<h2>Overview</h2><p>A high-scale loan collection platform managing approximately 382,000 loans with around 500,000 daily transactions. Built for performance, reliability, and operational efficiency at fintech scale.</p><h2>Key Features</h2><ul><li>Pluggable datasource architecture supporting PostgreSQL, MongoDB, and REST API integrations with configurable field mapping</li><li>Asynchronous background processing pipelines using Asynq for high-volume data imports and synchronization</li><li>Automated loan assignment workflows reducing manual operational effort</li><li>Re-architected reporting systems enabling real-time KPI tracking and collection performance visibility</li><li>~80% performance improvement through bottleneck identification and transaction flow optimization</li></ul>",
       tags: "[\"Next.js\",\"Go\",\"PostgreSQL\",\"Asynq\",\"Docker\"]",
@@ -170,6 +171,7 @@ async function main() {
     {
       id: 1,
       name: "CropConex",
+      slug: "cropconex",
       summary: "B2B commodity marketplace enabling traceable coffee trade with contract workflows, payments, inventory management, and scalable microservices architecture.",
       description: "<h2>Overview</h2>\n<p>CropConex is a B2B commodity marketplace digitizing the global coffee and agricultural supply chain. It connects farmers, cooperatives, exporters, and international buyers on a single platform — replacing fragmented, paper-heavy processes with a seamless digital workflow from harvest to delivery.</p>\n<h2>Key Features</h2>\n<ul>\n  <li><strong>Marketplace &amp; Contracts:</strong> Buyers and sellers negotiate, finalize, and track commodity contracts digitally with version history and structured approval workflows.</li>\n  <li><strong>Harvest Tracking:</strong> Lot-level traceability from farm to export, including quality assessment scores and grading records at every step of the supply chain.</li>\n  <li><strong>Inventory Management:</strong> Real-time stock levels across warehouse locations, with movement history and low-stock alerts.</li>\n  <li><strong>International Payments:</strong> Multi-currency payment processing via Stripe (global cards), Trustshare (escrow for commodity contracts), and Chapa (local Ethiopian payments).</li>\n  <li><strong>AI-Powered Recommendations:</strong> Muvi integration matches buyers to the most relevant listings based on purchasing history and preferences.</li>\n</ul>\n<h2>Architecture</h2>\n<p>Built on a microservice architecture with Go services handling performance-critical operations and Express.js for business logic. A GraphQL API gateway unifies all services. Infrastructure runs on AWS with auto-scaling EC2, RDS PostgreSQL, and S3 — all containerized with Docker and proxied through Nginx.</p>",
       tags: "[\"Go\",\"Node.js\",\"Nuxt.js\",\"Vue\",\"GraphQL\",\"AWS\",\"Stripe\"]",
@@ -183,6 +185,7 @@ async function main() {
     {
       id: 2,
       name: "OrbitHealth EMR (Live)",
+      slug: "orbithealth-emr-live",
       summary: "Microservices-based EMR system replacing a monolith, enabling domain isolation, event-driven workflows, and scalable clinical operations.",
       description: "<h2>Overview</h2>\n<p>OrbitHealth EMR is a complete architectural rewrite of a hospital's Electronic Medical Record system. The existing monolith was decomposed into six domain-driven microservices, enabling independent deployment, team autonomy, and significantly faster feature delivery across clinical departments.</p>\n<h2>Modules</h2>\n<ul>\n  <li><strong>Auth Service:</strong> JWT-based authentication with role management across doctor, nurse, pharmacist, lab technician, radiologist, and admin roles.</li>\n  <li><strong>Patient Service:</strong> Patient registration, medical history, appointment scheduling, consultation records, and referral management.</li>\n  <li><strong>Laboratory Service:</strong> Test order management, result entry with reference ranges, abnormal result flagging, and physician notification.</li>\n  <li><strong>Imaging Service:</strong> Radiology request routing, DICOM image storage references, and structured radiologist report delivery.</li>\n  <li><strong>Pharmacy Service:</strong> Prescription processing, drug inventory tracking with reorder alerts, and dispensing workflow.</li>\n  <li><strong>Finance Service:</strong> Patient billing, insurance claim submission, payment collection, and department-level revenue reporting.</li>\n</ul>\n<h2>Architecture</h2>\n<p>All services communicate through a Hasura GraphQL gateway using event-driven patterns for cross-service workflows. Each service owns its own PostgreSQL schema for true data isolation. Fully containerized with Docker, deployed behind Nginx with zero-downtime rolling deployments per service.</p>",
       tags: "[\"Go\",\"Node.js\",\"Nuxt.js\",\"Hasura\",\"PostgreSQL\"]",
@@ -196,6 +199,7 @@ async function main() {
     {
       id: 3,
       name: "Enterprise CRM System",
+      slug: "enterprise-crm-system",
       summary: "Multi-tenant CRM system with real-time updates, strict data isolation, and end-to-end customer lifecycle management.",
       description: "<h2>Overview</h2>\n<p>A multi-tenant enterprise CRM built on a microservice architecture, enabling companies to manage their entire customer lifecycle — from lead generation through billing and ongoing support — with complete data isolation between tenants.</p>\n<h2>Key Features</h2>\n<ul>\n  <li><strong>Sales Pipeline:</strong> Visual kanban-style deal pipeline with stage management, activity logging, follow-up reminders, and win/loss tracking.</li>\n  <li><strong>Billing &amp; Invoicing:</strong> Automated invoice generation, payment tracking, subscription lifecycle management, and overdue alerts.</li>\n  <li><strong>Customer Care:</strong> Support ticket system with SLA tracking, escalation rules, and canned responses.</li>\n  <li><strong>Multi-tenancy:</strong> Complete data and configuration isolation between companies on shared infrastructure.</li>\n  <li><strong>Real-time Notifications:</strong> GraphQL subscriptions push updates to agents without any polling overhead.</li>\n</ul>",
       tags: "[\"Node.js\",\"Vue\",\"GraphQL\",\"PostgreSQL\"]",
@@ -209,6 +213,7 @@ async function main() {
     {
       id: 5,
       name: "Orbital SaaS Platform",
+      slug: "orbital-saas-platform",
       summary: "Modular SaaS platform for hospitality and fitness businesses with plugin-based architecture and real-time workflows.",
       description: "<h2>Overview</h2>\n<p>Orbital is a plugin-based SaaS platform designed for hospitality and fitness businesses. Clients activate only the modules they need — assembling a tailored management platform without any custom development or vendor lock-in.</p>\n<h2>Available Plugins</h2>\n<ul>\n  <li><strong>Room Booking:</strong> Reservation management, availability calendar, and automated check-in/check-out workflows with housekeeping notifications.</li>\n  <li><strong>Point of Sale (POS):</strong> Restaurant and bar order management, table assignment, split billing, and receipt generation.</li>\n  <li><strong>GYM Membership:</strong> Member registration, flexible subscription plan management, attendance tracking, and automated renewal reminders.</li>\n  <li><strong>Class Scheduling:</strong> Trainer schedule management, class capacity control, member booking, and waitlist management.</li>\n</ul>",
       tags: "[\"Node.js\",\"React\",\"MongoDB\",\"Firebase\"]",
@@ -222,6 +227,7 @@ async function main() {
     {
       id: 6,
       name: "Ride-Hailing Platform",
+      slug: "ride-hailing-platform",
       summary: "Real-time ride-hailing system with live tracking, driver matching, and low-latency event processing.",
       description: "<h2>Overview</h2>\n<p>A full-stack ride-hailing application connecting urban passengers with nearby drivers in real time. Handles the complete ride lifecycle — from driver discovery and live tracking to cashless payment and post-trip rating.</p>\n<h2>Key Features</h2>\n<ul>\n  <li><strong>Real-time Driver Matching:</strong> Geolocation-based algorithm matches passengers with the nearest available driver, factoring in heading and estimated arrival time.</li>\n  <li><strong>Live GPS Tracking:</strong> Continuous driver location updates via Google Maps SDK in both passenger and driver apps throughout the trip.</li>\n  <li><strong>Socket.io Event Layer:</strong> Instant push of ride requests, driver acceptance, trip start/end events, and cancellations — sub-second latency, no polling.</li>\n  <li><strong>Dynamic Fare Estimation:</strong> Pricing calculated from distance, estimated duration, time of day, and demand surge multiplier shown before booking.</li>\n  <li><strong>Separate Driver App:</strong> Flutter app for drivers with trip request queue, in-app navigation, online/offline toggle, and earnings dashboard.</li>\n</ul>",
       tags: "[\"Node.js\",\"Flutter\",\"Socket.io\",\"Firebase\"]",
@@ -235,6 +241,7 @@ async function main() {
     {
       id: 8,
       name: "Deliverology (Gov Project)",
+      slug: "deliverology-gov-project",
       summary: "National reporting system for the Ethiopian Ministry of Education, replacing manual reporting with automated, auditable workflows.",
       description: "<h2>Overview</h2>\n<p>Deliverology is a data collection and compliance reporting system built for the Ethiopian Ministry of Education. It replaces a fully manual, email-and-spreadsheet process with a structured online platform for submission, validation, and centralized reporting.</p>\n<h2>Key Features</h2>\n<ul>\n  <li><strong>University Submission Portal:</strong> Structured digital forms for universities to submit academic, financial, enrollment, and infrastructure data on a defined reporting schedule.</li>\n  <li><strong>Automated Validation:</strong> Rules flag incomplete, out-of-range, or inconsistent submissions before they reach the Ministry.</li>\n  <li><strong>Ministry Dashboard:</strong> Aggregated view of all university submissions with filtering, status tracking, and approval workflows.</li>\n  <li><strong>Report Generation:</strong> Automated compilation of ministry-wide compliance reports with drill-down capability per institution.</li>\n  <li><strong>Audit Trail:</strong> Full history of every submission, revision, ministry comment, and approval action for accountability.</li>\n</ul>",
       tags: "[\"LoopBack\",\"Angular\",\"MongoDB\"]",
@@ -248,6 +255,7 @@ async function main() {
     {
       id: 7,
       name: "Amtu BI System",
+      slug: "amtu-bi-system",
       summary: "Business intelligence platform enabling centralized data aggregation, dashboards, and automated reporting across systems.",
       description: "<h2>Overview</h2>\n<p>Amtu is a business intelligence platform that aggregates operational data from across a company's systems and surfaces it as configurable dashboards and scheduled reports — helping leadership teams move from gut-feel decisions to data-driven ones.</p>\n<h2>Key Features</h2>\n<ul>\n  <li><strong>Dashboard Builder:</strong> Configurable chart widgets — bar, line, pie, and KPI scorecards — arranged into custom dashboard layouts per user role.</li>\n  <li><strong>Multi-source Ingestion:</strong> Connects to multiple internal databases and normalizes heterogeneous data into a unified reporting schema.</li>\n  <li><strong>Scheduled Reports:</strong> Automated report generation and email delivery on daily, weekly, or monthly schedules — no manual exports required.</li>\n  <li><strong>Role-based Views:</strong> Each department sees only the metrics relevant to their function.</li>\n</ul>",
       tags: "[\"Laravel\",\"Vue\",\"MySQL\"]",
@@ -261,6 +269,7 @@ async function main() {
     {
       id: 4,
       name: "Bus Booking Platform",
+      slug: "bus-booking-platform",
       summary: "A full-stack bus ticketing system for passengers and operators — with interactive seat selection, a Flutter mobile app, real-time availability, and local payment integration.",
       description: null,
       tags: "[\"Laravel\",\"Vue.js\",\"Flutter\",\"Firebase\",\"MySQL\"]",

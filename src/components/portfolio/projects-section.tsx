@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 
 type Project = {
   id: number;
+  slug: string;
   name: string;
   summary: string | null;
   description: string | null;
@@ -203,7 +204,7 @@ function ProjectCard({
 
       {/* View Details */}
       <Link
-        href={`/projects/${project.id}`}
+        href={`/projects/${project.slug}`}
         className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium text-[#a78bfa] hover:text-[#c4b5fd] transition-colors group/link"
       >
         View Details
