@@ -12,7 +12,6 @@ import {
   Award,
   Languages,
   User,
-  Mail,
   FileText,
   LogOut,
   ExternalLink,
@@ -29,8 +28,7 @@ const navItems = [
   { href: "/admin/certifications", label: "Certifications", icon: Award },
   { href: "/admin/languages", label: "Languages", icon: Languages },
   { href: "/admin/personal-info", label: "Personal Info", icon: User },
-  { href: "/admin/messages", label: "Messages", icon: Mail },
-  { href: "/admin/job-application", label: "Job Generator", icon: FileText },
+{ href: "/admin/job-application", label: "Job Generator", icon: FileText },
 ];
 
 export function AdminSidebar() {

@@ -33,11 +33,17 @@ export function ContactSection() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
+    if (!endpoint) {
+      toast.error("Contact form is not configured.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
