@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, Eye, Tag, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = 'force-dynamic';
+import { Navbar } from "@/components/layout/navbar";
 import { extractToc } from "@/lib/heading-ids";
 import { highlightCodeBlocks } from "@/lib/highlight-code";
 import { TableOfContents } from "@/components/blog/table-of-contents";
@@ -112,6 +113,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       <ViewTracker postId={post.id} />
 
       <script
@@ -122,7 +124,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-gray-200">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(124,58,237,0.08),transparent)]" />
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-10">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-10">
           <Link
             href="/blog"
             className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 transition-colors group mb-8"
@@ -229,7 +231,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Sticky sidebar */}
           <aside className="mt-10 lg:mt-0">
-            <div className="sticky top-8 space-y-4">
+            <div className="sticky top-24 space-y-4">
               <TableOfContents items={toc} />
               <ShareButtons url={canonicalUrl} title={post.title} />
               <ReactButton postId={post.id} initialReactions={post.reactions} />

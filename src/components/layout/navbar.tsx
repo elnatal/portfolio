@@ -60,6 +60,7 @@ async function downloadResume() {
 
 export function Navbar() {
   const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -115,12 +116,12 @@ export function Navbar() {
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a
-          href="#about"
+        <Link
+          href={isHomePage ? "#about" : "/#about"}
           className="font-bold text-lg gradient-text hover:opacity-90 transition-opacity"
         >
           ED.
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-1">
@@ -129,6 +130,7 @@ export function Navbar() {
             const isActive = isPage
               ? pathname.startsWith(link.href)
               : active === link.href.slice(1);
+            const resolvedHref = !isPage && !isHomePage ? `/${link.href}` : link.href;
             const cls = cn(
               "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
               isActive
@@ -137,10 +139,10 @@ export function Navbar() {
             );
             return (
               <li key={link.href}>
-                {isPage ? (
-                  <Link href={link.href} className={cls}>{link.label}</Link>
+                {isPage || !isHomePage ? (
+                  <Link href={resolvedHref} className={cls}>{link.label}</Link>
                 ) : (
-                  <a href={link.href} className={cls}>{link.label}</a>
+                  <a href={resolvedHref} className={cls}>{link.label}</a>
                 )}
               </li>
             );
@@ -185,6 +187,7 @@ export function Navbar() {
               const isActive = isPage
                 ? pathname.startsWith(link.href)
                 : active === link.href.slice(1);
+              const resolvedHref = !isPage && !isHomePage ? `/${link.href}` : link.href;
               const cls = cn(
                 "block px-3 py-2 rounded-lg text-sm font-medium transition-all",
                 isActive
@@ -193,12 +196,12 @@ export function Navbar() {
               );
               return (
                 <li key={link.href}>
-                  {isPage ? (
-                    <Link href={link.href} className={cls} onClick={() => setMenuOpen(false)}>
+                  {isPage || !isHomePage ? (
+                    <Link href={resolvedHref} className={cls} onClick={() => setMenuOpen(false)}>
                       {link.label}
                     </Link>
                   ) : (
-                    <a href={link.href} className={cls} onClick={() => setMenuOpen(false)}>
+                    <a href={resolvedHref} className={cls} onClick={() => setMenuOpen(false)}>
                       {link.label}
                     </a>
                   )}

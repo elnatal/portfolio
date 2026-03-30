@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Clock, Star, Search, X, Tag } from "lucide-react";
+import { Clock, Star, Search, X, Tag, Loader2 } from "lucide-react";
 
 interface BlogTag {
   id: number;
@@ -51,42 +51,87 @@ function highlight(text: string, query: string) {
 }
 
 export function BlogContent({ posts, allTags }: BlogContentProps) {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const activeTagSlug = searchParams.get("tag");
-  const [query, setQuery] = useState("");
+  const urlQ = searchParams.get("q")?.trim() ?? "";
+
+  const [inputValue, setInputValue] = useState(urlQ);
+  const [isSearching, setIsSearching] = useState(false);
+  const mounted = useRef(false);
+
+  // Turn off spinner when the server responds with new posts
+  useEffect(() => {
+    setIsSearching(false);
+  }, [posts]);
+
+  // Debounce: show spinner + update URL 400ms after typing stops
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    const timeout = setTimeout(() => {
+      setIsSearching(true);
+      const params = new URLSearchParams(searchParams.toString());
+      if (inputValue.trim()) {
+        params.set("q", inputValue.trim());
+      } else {
+        params.delete("q");
+      }
+      router.replace(`${pathname}?${params.toString()}`);
+    }, 400);
+    return () => clearTimeout(timeout);
+  }, [inputValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const activeTag = activeTagSlug ? allTags.find((t) => t.slug === activeTagSlug) : null;
-  const trimmed = query.trim().toLowerCase();
+  const isFiltering = !!urlQ || !!activeTagSlug;
 
-  const filtered = posts.filter((post) => {
-    const matchesTag = !activeTagSlug || post.tags.some((pt) => pt.tag.slug === activeTagSlug);
-    if (!trimmed) return matchesTag;
-    return (
-      matchesTag &&
-      (post.title.toLowerCase().includes(trimmed) ||
-        (post.excerpt ?? "").toLowerCase().includes(trimmed) ||
-        post.tags.some((pt) => pt.tag.name.toLowerCase().includes(trimmed)))
-    );
-  });
+  function handleInputChange(value: string) {
+    setInputValue(value);
+  }
 
-  const isFiltering = !!trimmed || !!activeTagSlug;
+  function clearSearch() {
+    setInputValue("");
+    setIsSearching(true);
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("q");
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
+  function buildUrl(overrides: { q?: string; tag?: string | null }) {
+    const params = new URLSearchParams();
+    const q = "q" in overrides ? overrides.q : urlQ;
+    const tag = "tag" in overrides ? overrides.tag : activeTagSlug;
+    if (q?.trim()) params.set("q", q.trim());
+    if (tag) params.set("tag", tag);
+    const qs = params.toString();
+    return qs ? `/blog?${qs}` : "/blog";
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
 
       {/* Search bar */}
       <div className="relative mb-8">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+        {isSearching
+          ? <span className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none flex items-center">
+              <Loader2 className="w-4 h-4 text-violet-500 animate-spin" />
+            </span>
+          : <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+        }
         <input
           type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={inputValue}
+          onChange={(e) => handleInputChange(e.target.value)}
           placeholder="Search posts by title, excerpt, or tag..."
           className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 bg-white text-gray-900 placeholder:text-gray-400 text-sm focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all"
         />
-        {query && (
+        {inputValue && (
           <button
-            onClick={() => setQuery("")}
+            onClick={clearSearch}
             className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded-full text-gray-400 hover:text-gray-600 transition-colors"
           >
             <X className="w-4 h-4" />
@@ -98,29 +143,26 @@ export function BlogContent({ posts, allTags }: BlogContentProps) {
       {isFiltering && (
         <div className="flex items-center gap-3 mb-6 flex-wrap">
           <span className="text-sm text-gray-500">
-            {filtered.length} result{filtered.length !== 1 ? "s" : ""}
-            {trimmed && <> for <span className="font-medium text-gray-700">&ldquo;{query}&rdquo;</span></>}
+            {posts.length} result{posts.length !== 1 ? "s" : ""}
+            {urlQ && <> for <span className="font-medium text-gray-700">&ldquo;{urlQ}&rdquo;</span></>}
           </span>
           {activeTag && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-100 border border-violet-200 text-violet-700 text-sm font-medium">
               <Tag className="w-3.5 h-3.5" />
               #{activeTag.name}
-              <Link href={query ? `/blog?q=${encodeURIComponent(query)}` : "/blog"} className="ml-1 hover:text-violet-900">
+              <Link href={buildUrl({ tag: null })} className="ml-1 hover:text-violet-900">
                 <X className="w-3 h-3" />
               </Link>
             </span>
           )}
-          {(trimmed || activeTagSlug) && (
-            <button
-              onClick={() => setQuery("")}
+          {isFiltering && (
+            <Link
+              href="/blog"
+              onClick={() => setInputValue("")}
               className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
             >
-              {activeTagSlug ? (
-                <Link href="/blog">Clear all</Link>
-              ) : (
-                "Clear"
-              )}
-            </button>
+              Clear all
+            </Link>
           )}
         </div>
       )}
@@ -129,28 +171,29 @@ export function BlogContent({ posts, allTags }: BlogContentProps) {
 
         {/* Posts grid */}
         <div>
-          {filtered.length === 0 ? (
+          {posts.length === 0 ? (
             <div className="text-center py-16 space-y-2">
               <Search className="w-8 h-8 text-gray-300 mx-auto" />
               <p className="text-gray-400 text-sm">
-                {trimmed
-                  ? `No posts match "${query}"`
+                {urlQ
+                  ? `No posts match "${urlQ}"`
                   : activeTag
                   ? `No posts tagged #${activeTag.name}`
                   : "No posts published yet."}
               </p>
               {isFiltering && (
-                <button
-                  onClick={() => setQuery("")}
+                <Link
+                  href="/blog"
+                  onClick={() => setInputValue("")}
                   className="text-violet-600 text-sm hover:underline"
                 >
-                  {activeTagSlug ? <Link href="/blog">Clear filters</Link> : "Clear search"}
-                </button>
+                  Clear filters
+                </Link>
               )}
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {filtered.map((post) => (
+              {posts.map((post) => (
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}`}
@@ -175,11 +218,11 @@ export function BlogContent({ posts, allTags }: BlogContentProps) {
                       </div>
                     )}
                     <h2 className="text-gray-900 font-semibold text-base leading-snug mb-2 group-hover:text-violet-700 transition-colors line-clamp-2">
-                      {trimmed ? highlight(post.title, query) : post.title}
+                      {urlQ ? highlight(post.title, urlQ) : post.title}
                     </h2>
                     {post.excerpt && (
                       <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 flex-1 mb-3">
-                        {trimmed ? highlight(post.excerpt, query) : post.excerpt}
+                        {urlQ ? highlight(post.excerpt, urlQ) : post.excerpt}
                       </p>
                     )}
                     <div className="flex flex-wrap gap-1.5 mb-3">
@@ -209,14 +252,14 @@ export function BlogContent({ posts, allTags }: BlogContentProps) {
         {/* Tags sidebar */}
         {allTags.length > 0 && (
           <aside className="mt-10 lg:mt-0">
-            <div className="sticky top-8">
+            <div className="sticky top-24">
               <div className="rounded-2xl border border-gray-200 bg-white p-5">
                 <h3 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Tags</h3>
                 <div className="flex flex-col gap-1">
                   {allTags.map((t) => (
                     <Link
                       key={t.id}
-                      href={`/blog?tag=${t.slug}`}
+                      href={buildUrl({ tag: activeTagSlug === t.slug ? null : t.slug })}
                       className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-colors ${
                         activeTagSlug === t.slug
                           ? "bg-violet-50 text-violet-700 font-medium"

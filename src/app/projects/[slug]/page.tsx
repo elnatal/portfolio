@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, Github, Star, Layers, ArrowRight } from "lucid
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = 'force-dynamic';
+import { Navbar } from "@/components/layout/navbar";
 import { Badge } from "@/components/ui/badge";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 
@@ -92,6 +93,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -113,7 +115,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       <div className="relative overflow-hidden border-b border-gray-200">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(124,58,237,0.08),transparent)]" />
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-14">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-14">
           {/* Back */}
           <Link
             href="/#projects"
@@ -205,7 +207,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
           {/* Right — sticky sidebar */}
           <aside className="mt-8 lg:mt-0">
-            <div className="sticky top-8 space-y-5">
+            <div className="sticky top-24 space-y-5">
 
               {/* Tech stack */}
               {tags.length > 0 && (
