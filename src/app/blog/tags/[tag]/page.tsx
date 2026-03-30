@@ -5,6 +5,8 @@ import Image from "next/image";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = 'force-dynamic';
+
 const SITE_URL = "https://elnatal.com";
 
 interface TagPageProps {

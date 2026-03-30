@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Clock, Eye, Tag, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+
+export const dynamic = 'force-dynamic';
 import { extractToc } from "@/lib/heading-ids";
 import { highlightCodeBlocks } from "@/lib/highlight-code";
 import { TableOfContents } from "@/components/blog/table-of-contents";

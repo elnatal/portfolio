@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
+
+export const dynamic = 'force-dynamic';
 import { BlogContent } from "@/components/blog/blog-content";
 
 const SITE_URL = "https://elnatal.com";

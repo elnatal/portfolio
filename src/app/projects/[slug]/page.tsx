@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github, Star, Layers, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+
+export const dynamic = 'force-dynamic';
 import { Badge } from "@/components/ui/badge";
 import { ProjectGallery } from "@/components/portfolio/project-gallery";
 
