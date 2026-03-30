@@ -15,6 +15,7 @@ import {
   FileText,
   LogOut,
   ExternalLink,
+  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/experience", label: "Experience", icon: Briefcase },
   { href: "/admin/projects", label: "Projects", icon: FolderOpen },
+  { href: "/admin/blog", label: "Blog", icon: BookOpen },
   { href: "/admin/skills", label: "Skills", icon: Code },
   { href: "/admin/education", label: "Education", icon: GraduationCap },
   { href: "/admin/certifications", label: "Certifications", icon: Award },

@@ -121,6 +121,33 @@
     color: #f8fafc;
   }
 
+  /* Blog editor placeholder */
+  .blog-editor .tiptap p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #4b5563;
+    pointer-events: none;
+    height: 0;
+  }
+
+  /* Blog editor content styles */
+  .blog-editor .tiptap {
+    min-height: inherit;
+  }
+  .blog-editor .tiptap > * + * { margin-top: 0.6em; }
+  .blog-editor .tiptap h2 { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
+  .blog-editor .tiptap h3 { font-size: 1rem; font-weight: 600; color: #e2e8f0; }
+  .blog-editor .tiptap strong { color: #f1f5f9; font-weight: 600; }
+  .blog-editor .tiptap ul, .blog-editor .tiptap ol { padding-left: 1.4em; }
+  .blog-editor .tiptap li { margin-top: 0.2em; }
+  .blog-editor .tiptap ul li { list-style: disc; }
+  .blog-editor .tiptap ol li { list-style: decimal; }
+  .blog-editor .tiptap hr { border-color: rgba(255,255,255,0.1); margin: 1em 0; }
+  .blog-editor .tiptap a { color: #a78bfa; text-decoration: underline; }
+  .blog-editor .tiptap blockquote { border-left: 3px solid #7c3aed; padding-left: 1em; color: #94a3b8; font-style: italic; margin: 0.8em 0; }
+  .blog-editor .tiptap pre { background: #0d1117; border-radius: 0.5rem; padding: 1em; overflow-x: auto; margin: 0.8em 0; }
+  .blog-editor .tiptap pre code { color: #e6edf3; font-size: 0.85rem; font-family: "JetBrains Mono", monospace; }
+
   /* Tiptap editor placeholder */
   .rich-text-editor .tiptap p.is-editor-empty:first-child::before {
     content: attr(data-placeholder);

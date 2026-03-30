@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ["@react-pdf/renderer", "ai", "@ai-sdk/groq", "bcryptjs"],
+  serverExternalPackages: ["@react-pdf/renderer", "ai", "@ai-sdk/groq", "bcryptjs", "shiki", "feed"],
   turbopack: {
     root: process.cwd(),
   },

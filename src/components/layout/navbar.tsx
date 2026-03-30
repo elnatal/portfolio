@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, createElement } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Download, Loader2, Menu, X } from "lucide-react";
 
@@ -13,6 +15,7 @@ const navLinks = [
   { label: "Certifications", href: "#certifications" },
   { label: "Languages", href: "#languages" },
   { label: "Contact", href: "#contact" },
+  { label: "Blog", href: "/blog" },
 ];
 
 function fileDate() {
@@ -56,6 +59,7 @@ async function downloadResume() {
 }
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -84,8 +88,8 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Scroll spy
-      const sections = navLinks.map((l) => l.href.slice(1));
+      // Scroll spy — only for hash links
+      const sections = navLinks.filter((l) => l.href.startsWith("#")).map((l) => l.href.slice(1));
       let current = "";
       for (const id of sections) {
         const el = document.getElementById(id);
@@ -120,21 +124,27 @@ export function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={cn(
-                  "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
-                  active === link.href.slice(1)
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+          {navLinks.map((link) => {
+            const isPage = link.href.startsWith("/");
+            const isActive = isPage
+              ? pathname.startsWith(link.href)
+              : active === link.href.slice(1);
+            const cls = cn(
+              "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
+              isActive
+                ? "text-primary bg-primary/10"
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+            );
+            return (
+              <li key={link.href}>
+                {isPage ? (
+                  <Link href={link.href} className={cls}>{link.label}</Link>
+                ) : (
+                  <a href={link.href} className={cls}>{link.label}</a>
                 )}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
         {/* Download buttons — desktop */}
@@ -170,22 +180,31 @@ export function Navbar() {
       {menuOpen && (
         <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-lg">
           <ul className="px-4 py-3 space-y-1">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={cn(
-                    "block px-3 py-2 rounded-lg text-sm font-medium transition-all",
-                    active === link.href.slice(1)
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+            {navLinks.map((link) => {
+              const isPage = link.href.startsWith("/");
+              const isActive = isPage
+                ? pathname.startsWith(link.href)
+                : active === link.href.slice(1);
+              const cls = cn(
+                "block px-3 py-2 rounded-lg text-sm font-medium transition-all",
+                isActive
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              );
+              return (
+                <li key={link.href}>
+                  {isPage ? (
+                    <Link href={link.href} className={cls} onClick={() => setMenuOpen(false)}>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className={cls} onClick={() => setMenuOpen(false)}>
+                      {link.label}
+                    </a>
                   )}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+                </li>
+              );
+            })}
             <li className="flex gap-2 pt-1 border-t border-border mt-1">
               <button
                 onClick={() => { handleDownloadResume(); setMenuOpen(false); }}

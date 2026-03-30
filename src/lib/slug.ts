@@ -43,3 +43,28 @@ export async function uniqueSlug(
     counter++;
   }
 }
+
+/**
+ * Generic unique slug generator for any model.
+ * Pass a finder function that looks up a slug and returns { id } or null.
+ */
+export async function uniqueSlugForModel(
+  findBySlug: (slug: string) => Promise<{ id: number } | null>,
+  name: string,
+  excludeId?: number
+): Promise<string> {
+  const base = slugify(name);
+  let candidate = base;
+  let counter = 1;
+
+  while (true) {
+    const existing = await findBySlug(candidate);
+
+    if (!existing || existing.id === excludeId) {
+      return candidate;
+    }
+
+    candidate = `${base}-${counter}`;
+    counter++;
+  }
+}

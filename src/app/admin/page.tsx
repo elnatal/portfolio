@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { Briefcase, FolderOpen, Code, GraduationCap, User, ArrowRight } from "lucide-react";
+import { Briefcase, FolderOpen, Code, GraduationCap, User, ArrowRight, BookOpen } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const [experienceCount, projectsCount, skillsCount] =
+  const [experienceCount, projectsCount, skillsCount, blogPostsCount] =
     await Promise.all([
       prisma.experience.count(),
       prisma.project.count(),
       prisma.skill.count(),
+      prisma.blogPost.count(),
     ]);
 
   const stats = [
@@ -38,6 +39,15 @@ export default async function AdminDashboard() {
       bg: "bg-emerald-500/10",
       border: "border-emerald-500/20",
     },
+    {
+      label: "Blog Posts",
+      value: blogPostsCount,
+      icon: BookOpen,
+      href: "/admin/blog",
+      color: "text-amber-400",
+      bg: "bg-amber-500/10",
+      border: "border-amber-500/20",
+    },
   ];
 
   const quickLinks = [
@@ -46,6 +56,7 @@ export default async function AdminDashboard() {
     { label: "Manage Skills", href: "/admin/skills", icon: Code },
     { label: "Manage Education", href: "/admin/education", icon: GraduationCap },
     { label: "Personal Info", href: "/admin/personal-info", icon: User },
+    { label: "Blog Posts", href: "/admin/blog", icon: BookOpen },
   ];
 
   return (
