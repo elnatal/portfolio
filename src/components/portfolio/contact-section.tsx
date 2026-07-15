@@ -145,8 +145,8 @@ export function ContactSection() {
             </div>
 
             {/* Decorative gradient bar */}
-            <div className="pt-4 border-t border-white/6">
-              <div className="h-1.5 w-full rounded-full bg-gradient-to-r from-[#7c3aed] via-[#a78bfa] to-[#c4b5fd] opacity-60" />
+            <div className="pt-4 border-t border-foreground/6">
+              <div className="h-1.5 w-full rounded-full bg-primary opacity-60" />
             </div>
           </motion.div>
 
@@ -258,7 +258,7 @@ export function ContactSection() {
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="w-full gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] text-white border-0 glow-hover"
+                className="w-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground border-0 glow-hover"
               >
                 {isSubmitting ? (
                   <>
