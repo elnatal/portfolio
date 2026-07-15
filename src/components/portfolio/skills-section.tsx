@@ -145,7 +145,7 @@ export function SkillsSection({ skills }: { skills: Skill[] }) {
                       key={skill.id}
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.15 }}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/8 text-foreground hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200 cursor-default"
+                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-foreground/5 border border-foreground/8 text-foreground hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200 cursor-default"
                     >
                       {skill.name}
                     </motion.span>
