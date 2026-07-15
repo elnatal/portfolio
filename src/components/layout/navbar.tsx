@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Download, Loader2, Menu, X } from "lucide-react";
+import { ThemeToggle } from "@/components/layout/theme-toggle";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -167,6 +168,7 @@ export function Navbar() {
             {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
             CV
           </button>
+          <ThemeToggle />
         </div>
 
         {/* Mobile menu button */}
@@ -225,6 +227,9 @@ export function Navbar() {
                 {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
                 CV
               </button>
+            </li>
+            <li className="flex justify-center pt-1">
+              <ThemeToggle />
             </li>
           </ul>
         </div>
