@@ -31,6 +31,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude
+/.claude
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
@@ -39,3 +42,6 @@ next-env.d.ts
 *.db
 *.db-journal
 prisma/dev.db
+
+# superpowers subagent-driven-development scratch (progress ledger, briefs, reports)
+/.superpowers/
