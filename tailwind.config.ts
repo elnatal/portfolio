@@ -43,7 +43,7 @@ const config: Config = {
           DEFAULT: "oklch(var(--destructive) / <alpha-value>)",
           foreground: "oklch(var(--destructive-foreground) / <alpha-value>)",
         },
-        // Fixed subtle alpha by design — always a barely-there white line/fill.
+        // Fixed subtle alpha by design — a barely-there line/fill (white in dark mode, black in light mode).
         border: "oklch(var(--border) / 8%)",
         input: "oklch(var(--input) / 10%)",
         ring: "oklch(var(--ring) / <alpha-value>)",
