@@ -156,7 +156,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
+              className="gap-2 border-foreground/10 bg-foreground/4 hover:bg-foreground/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
             >
               <Github className="size-4" />
               GitHub
@@ -166,7 +166,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
+              className="gap-2 border-foreground/10 bg-foreground/4 hover:bg-foreground/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
             >
               <Linkedin className="size-4" />
               LinkedIn
@@ -175,7 +175,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
           <a href={`mailto:${email}`}>
             <Button
               size="lg"
-              className="gap-2 bg-primary hover:bg-primary/90 text-white border-0 glow-hover"
+              className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground border-0 glow-hover"
             >
               <Mail className="size-4" />
               Get In Touch
@@ -185,7 +185,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
+              className="gap-2 border-foreground/10 bg-foreground/4 hover:bg-foreground/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
             >
               <Download className="size-4" />
               Download CV
