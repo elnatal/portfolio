@@ -154,7 +154,7 @@ export function Navbar() {
           <button
             onClick={handleDownloadResume}
             disabled={resumeLoading}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-all duration-200 disabled:opacity-50"
           >
             {resumeLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
             Resume
@@ -162,7 +162,7 @@ export function Navbar() {
           <button
             onClick={handleDownloadCV}
             disabled={cvLoading}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-all duration-200 disabled:opacity-50"
           >
             {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
             CV
@@ -212,7 +212,7 @@ export function Navbar() {
               <button
                 onClick={() => { handleDownloadResume(); setMenuOpen(false); }}
                 disabled={resumeLoading}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-all duration-200 disabled:opacity-50"
               >
                 {resumeLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
                 Resume
@@ -220,7 +220,7 @@ export function Navbar() {
               <button
                 onClick={() => { handleDownloadCV(); setMenuOpen(false); }}
                 disabled={cvLoading}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-[#a78bfa] hover:bg-secondary transition-all duration-200 disabled:opacity-50"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary transition-all duration-200 disabled:opacity-50"
               >
                 {cvLoading ? <Loader2 className="size-3.5 animate-spin" /> : <Download className="size-3.5" />}
                 CV

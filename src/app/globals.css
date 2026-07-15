@@ -5,27 +5,31 @@
 
 @layer base {
   :root {
-    /* Dark portfolio theme — always dark */
-    --background: oklch(0.08 0 0);
-    --foreground: oklch(0.97 0 0);
-    --card: oklch(0.11 0 0);
-    --card-foreground: oklch(0.97 0 0);
-    --popover: oklch(0.11 0 0);
-    --popover-foreground: oklch(0.97 0 0);
+    /* Dark portfolio theme — always dark.
+       Values are raw oklch() components (no wrapping function) so
+       tailwind.config.ts can compose them with an alpha channel via
+       oklch(var(--x) / <alpha-value>) — required for opacity modifiers
+       like bg-primary/10 to work. */
+    --background: 0.08 0 0;
+    --foreground: 0.97 0 0;
+    --card: 0.11 0 0;
+    --card-foreground: 0.97 0 0;
+    --popover: 0.11 0 0;
+    --popover-foreground: 0.97 0 0;
     /* Purple primary */
-    --primary: oklch(0.54 0.24 293);
-    --primary-foreground: oklch(0.97 0 0);
-    --secondary: oklch(0.15 0 0);
-    --secondary-foreground: oklch(0.97 0 0);
-    --muted: oklch(0.18 0 0);
-    --muted-foreground: oklch(0.63 0 0);
-    --accent: oklch(0.54 0.24 293);
-    --accent-foreground: oklch(0.97 0 0);
-    --destructive: oklch(0.65 0.22 27);
-    --destructive-foreground: oklch(0.97 0 0);
-    --border: oklch(1 0 0 / 8%);
-    --input: oklch(1 0 0 / 10%);
-    --ring: oklch(0.54 0.24 293);
+    --primary: 0.54 0.24 293;
+    --primary-foreground: 0.97 0 0;
+    --secondary: 0.15 0 0;
+    --secondary-foreground: 0.97 0 0;
+    --muted: 0.18 0 0;
+    --muted-foreground: 0.63 0 0;
+    --accent: 0.54 0.24 293;
+    --accent-foreground: 0.97 0 0;
+    --destructive: 0.65 0.22 27;
+    --destructive-foreground: 0.97 0 0;
+    --border: 1 0 0;
+    --input: 1 0 0;
+    --ring: 0.54 0.24 293;
     --radius: 0.75rem;
     --sidebar: oklch(0.11 0 0);
     --sidebar-foreground: oklch(0.97 0 0);
@@ -73,23 +77,28 @@
   }
   .glass-hover:hover {
     background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(124, 58, 237, 0.3);
+    border-color: oklch(var(--primary) / 0.3);
   }
 
   /* Purple glow */
   .glow {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    box-shadow: 0 0 20px oklch(var(--primary) / 0.3);
   }
   .glow-hover {
     transition: box-shadow 0.3s ease;
   }
   .glow-hover:hover {
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+    box-shadow: 0 0 30px oklch(var(--primary) / 0.5);
   }
 
-  /* Gradient text */
+  /* Gradient text — tints of the single primary accent, lightened toward white */
   .gradient-text {
-    background: linear-gradient(135deg, #7c3aed, #a78bfa, #c4b5fd);
+    background: linear-gradient(
+      135deg,
+      oklch(var(--primary)),
+      color-mix(in oklch, oklch(var(--primary)), white 35%),
+      color-mix(in oklch, oklch(var(--primary)), white 65%)
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -97,7 +106,7 @@
 
   /* Timeline line */
   .timeline-line {
-    background: linear-gradient(to bottom, #7c3aed, transparent);
+    background: linear-gradient(to bottom, oklch(var(--primary)), transparent);
   }
 
   /* Custom scrollbar */
@@ -108,17 +117,17 @@
     background: #0a0a0a;
   }
   ::-webkit-scrollbar-thumb {
-    background: #7c3aed;
+    background: oklch(var(--primary));
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #a78bfa;
+    background: color-mix(in oklch, oklch(var(--primary)), white 25%);
   }
 
   /* Selection */
   ::selection {
-    background: rgba(124, 58, 237, 0.3);
-    color: #f8fafc;
+    background: oklch(var(--primary) / 0.3);
+    color: oklch(var(--foreground));
   }
 
   /* Blog editor placeholder */

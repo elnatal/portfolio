@@ -17,30 +17,31 @@ type CategoryConfig = {
   bgColor: string;
 };
 
+// One accent color for every category — differentiate by icon/label, not hue.
 const categoryConfig: Record<string, CategoryConfig> = {
   Languages: {
     label: "Languages",
     icon: <Code className="size-5" />,
-    color: "text-violet-400",
-    bgColor: "bg-violet-500/10 border-violet-500/20",
+    color: "text-primary",
+    bgColor: "bg-primary/10 border-primary/20",
   },
   Frameworks: {
     label: "Frameworks",
     icon: <Layers className="size-5" />,
-    color: "text-purple-400",
-    bgColor: "bg-purple-500/10 border-purple-500/20",
+    color: "text-primary",
+    bgColor: "bg-primary/10 border-primary/20",
   },
   Databases: {
     label: "Databases",
     icon: <Database className="size-5" />,
-    color: "text-fuchsia-400",
-    bgColor: "bg-fuchsia-500/10 border-fuchsia-500/20",
+    color: "text-primary",
+    bgColor: "bg-primary/10 border-primary/20",
   },
   DevOps: {
     label: "DevOps & Tools",
     icon: <Server className="size-5" />,
-    color: "text-pink-400",
-    bgColor: "bg-pink-500/10 border-pink-500/20",
+    color: "text-primary",
+    bgColor: "bg-primary/10 border-primary/20",
   },
 };
 
@@ -91,15 +92,15 @@ export function SkillsSection({ skills }: { skills: Skill[] }) {
           className="mb-16 text-center"
         >
           <div className="flex items-center justify-center gap-3 mb-3">
-            <Cpu className="size-5 text-[#7c3aed]" />
-            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#7c3aed]">
+            <Cpu className="size-5 text-primary" />
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
               Expertise
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Skills & Technologies
           </h2>
-          <div className="mx-auto h-1 w-20 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#a78bfa]" />
+          <div className="mx-auto h-1 w-20 rounded-full bg-primary" />
         </motion.div>
 
         {/* 2x2 grid of category panels */}
@@ -114,8 +115,8 @@ export function SkillsSection({ skills }: { skills: Skill[] }) {
             const config = categoryConfig[cat] ?? {
               label: cat,
               icon: <Code className="size-5" />,
-              color: "text-violet-400",
-              bgColor: "bg-violet-500/10 border-violet-500/20",
+              color: "text-primary",
+              bgColor: "bg-primary/10 border-primary/20",
             };
             const catSkills = grouped[cat] ?? [];
 
@@ -144,7 +145,7 @@ export function SkillsSection({ skills }: { skills: Skill[] }) {
                       key={skill.id}
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.15 }}
-                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/8 text-foreground hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/10 hover:text-[#a78bfa] transition-all duration-200 cursor-default"
+                      className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-white/8 text-foreground hover:border-primary/40 hover:bg-primary/10 hover:text-primary transition-all duration-200 cursor-default"
                     >
                       {skill.name}
                     </motion.span>

@@ -89,12 +89,12 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
       >
-        <div className="h-[600px] w-[600px] rounded-full bg-[#7c3aed]/10 blur-[120px]" />
+        <div className="h-[600px] w-[600px] rounded-full bg-primary/10 blur-[120px]" />
       </div>
       {/* Secondary subtle glow top-right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-0 right-0 h-[350px] w-[350px] rounded-full bg-[#a78bfa]/6 blur-[90px]"
+        className="pointer-events-none absolute top-0 right-0 h-[350px] w-[350px] rounded-full bg-primary/6 blur-[90px]"
       />
       {/* Dot grid overlay */}
       <div
@@ -115,7 +115,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
       >
         {/* Diamond accent + name */}
         <motion.div variants={itemVariants} className="mb-4">
-          <span className="text-[#7c3aed] text-2xl mr-3 select-none">◆</span>
+          <span className="text-primary text-2xl mr-3 select-none">◆</span>
           <span className="text-sm font-semibold tracking-[0.25em] uppercase text-muted-foreground">
             Portfolio
           </span>
@@ -135,7 +135,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
         >
           <span className="text-xl md:text-2xl font-medium text-muted-foreground">
             {displayed}
-            <span className="inline-block w-[2px] h-[1.1em] bg-[#7c3aed] ml-0.5 align-middle animate-pulse" />
+            <span className="inline-block w-[2px] h-[1.1em] bg-primary ml-0.5 align-middle animate-pulse" />
           </span>
         </motion.div>
 
@@ -156,7 +156,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-[#7c3aed]/40 hover:text-[#a78bfa] transition-all duration-200 glow-hover"
+              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
             >
               <Github className="size-4" />
               GitHub
@@ -166,7 +166,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-[#7c3aed]/40 hover:text-[#a78bfa] transition-all duration-200 glow-hover"
+              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
             >
               <Linkedin className="size-4" />
               LinkedIn
@@ -175,7 +175,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
           <a href={`mailto:${email}`}>
             <Button
               size="lg"
-              className="gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] text-white border-0 glow-hover"
+              className="gap-2 bg-primary hover:bg-primary/90 text-white border-0 glow-hover"
             >
               <Mail className="size-4" />
               Get In Touch
@@ -185,7 +185,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             <Button
               variant="outline"
               size="lg"
-              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-[#7c3aed]/40 hover:text-[#a78bfa] transition-all duration-200 glow-hover"
+              className="gap-2 border-white/10 bg-white/4 hover:bg-white/8 hover:border-primary/40 hover:text-primary transition-all duration-200 glow-hover"
             >
               <Download className="size-4" />
               Download CV
@@ -197,7 +197,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
         <motion.a
           variants={itemVariants}
           href="#experience"
-          className="flex flex-col items-center gap-2 text-sm text-muted-foreground hover:text-[#a78bfa] transition-colors duration-200 group"
+          className="flex flex-col items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-200 group"
         >
           <span className="tracking-widest uppercase text-xs font-medium">
             View My Work
@@ -206,7 +206,7 @@ export function HeroSection({ info }: { info: PersonalInfo }) {
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           >
-            <ChevronDown className="size-5 group-hover:text-[#7c3aed] transition-colors" />
+            <ChevronDown className="size-5 group-hover:text-primary transition-colors" />
           </motion.div>
         </motion.a>
       </motion.div>

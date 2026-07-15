@@ -63,15 +63,15 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
           className="mb-16 text-center"
         >
           <div className="flex items-center justify-center gap-3 mb-3">
-            <Folders className="size-5 text-[#7c3aed]" />
-            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#7c3aed]">
+            <Folders className="size-5 text-primary" />
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
               Portfolio
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Projects
           </h2>
-          <div className="mx-auto h-1 w-20 rounded-full bg-gradient-to-r from-[#7c3aed] to-[#a78bfa]" />
+          <div className="mx-auto h-1 w-20 rounded-full bg-primary" />
         </motion.div>
 
         {/* Featured projects — larger cards */}
@@ -146,7 +146,7 @@ function ProjectCard({
             {project.name}
           </h3>
           {isFeatured && (
-            <Badge className="bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/25 text-[10px] gap-1">
+            <Badge className="bg-primary/15 text-primary border border-primary/25 text-[10px] gap-1">
               <Star className="size-2.5" />
               Featured
             </Badge>
@@ -160,7 +160,7 @@ function ProjectCard({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-[#a78bfa] transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors"
               title="View source"
             >
               <Github className="size-4" />
@@ -171,7 +171,7 @@ function ProjectCard({
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-[#a78bfa] transition-colors"
+              className="text-muted-foreground hover:text-primary transition-colors"
               title="View live"
             >
               <ExternalLink className="size-4" />
@@ -194,7 +194,7 @@ function ProjectCard({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#7c3aed]/10 text-[#a78bfa] border border-[#7c3aed]/15"
+              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-primary/10 text-primary border border-primary/15"
             >
               {tag}
             </span>
@@ -205,7 +205,7 @@ function ProjectCard({
       {/* View Details */}
       <Link
         href={`/projects/${project.slug}`}
-        className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium text-[#a78bfa] hover:text-[#c4b5fd] transition-colors group/link"
+        className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary transition-colors group/link"
       >
         View Details
         <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" />
