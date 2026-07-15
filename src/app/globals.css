@@ -5,18 +5,47 @@
 
 @layer base {
   :root {
-    /* Dark portfolio theme — always dark.
-       Values are raw oklch() components (no wrapping function) so
-       tailwind.config.ts can compose them with an alpha channel via
-       oklch(var(--x) / <alpha-value>) — required for opacity modifiers
-       like bg-primary/10 to work. */
+    /* Light theme (default). Values are raw oklch() components — see
+       tailwind.config.ts, which composes them via oklch(var(--x) / <alpha-value>). */
+    --background: 0.99 0 0;
+    --foreground: 0.15 0 0;
+    --card: 0.97 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 0.97 0 0;
+    --popover-foreground: 0.15 0 0;
+    /* Purple primary — unchanged between themes */
+    --primary: 0.54 0.24 293;
+    --primary-foreground: 0.97 0 0;
+    --secondary: 0.94 0 0;
+    --secondary-foreground: 0.15 0 0;
+    --muted: 0.94 0 0;
+    --muted-foreground: 0.45 0 0;
+    --accent: 0.54 0.24 293;
+    --accent-foreground: 0.97 0 0;
+    --destructive: 0.58 0.22 27;
+    --destructive-foreground: 0.97 0 0;
+    --border: 0 0 0;
+    --input: 0 0 0;
+    --ring: 0.54 0.24 293;
+    --radius: 0.75rem;
+    --sidebar: oklch(0.11 0 0);
+    --sidebar-foreground: oklch(0.97 0 0);
+    --sidebar-primary: oklch(0.54 0.24 293);
+    --sidebar-primary-foreground: oklch(0.97 0 0);
+    --sidebar-accent: oklch(0.15 0 0);
+    --sidebar-accent-foreground: oklch(0.97 0 0);
+    --sidebar-border: oklch(1 0 0 / 8%);
+    --sidebar-ring: oklch(0.54 0.24 293);
+  }
+
+  .dark {
+    /* Dark theme (original palette, unchanged) */
     --background: 0.08 0 0;
     --foreground: 0.97 0 0;
     --card: 0.11 0 0;
     --card-foreground: 0.97 0 0;
     --popover: 0.11 0 0;
     --popover-foreground: 0.97 0 0;
-    /* Purple primary */
     --primary: 0.54 0.24 293;
     --primary-foreground: 0.97 0 0;
     --secondary: 0.15 0 0;
@@ -30,15 +59,6 @@
     --border: 1 0 0;
     --input: 1 0 0;
     --ring: 0.54 0.24 293;
-    --radius: 0.75rem;
-    --sidebar: oklch(0.11 0 0);
-    --sidebar-foreground: oklch(0.97 0 0);
-    --sidebar-primary: oklch(0.54 0.24 293);
-    --sidebar-primary-foreground: oklch(0.97 0 0);
-    --sidebar-accent: oklch(0.15 0 0);
-    --sidebar-accent-foreground: oklch(0.97 0 0);
-    --sidebar-border: oklch(1 0 0 / 8%);
-    --sidebar-ring: oklch(0.54 0.24 293);
   }
 }
 
@@ -65,10 +85,10 @@
 
   /* Glassmorphism card */
   .glass {
-    background: rgba(255, 255, 255, 0.04);
+    background: oklch(var(--foreground) / 4%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid oklch(var(--foreground) / 8%);
     border-radius: var(--radius);
   }
 
@@ -114,7 +134,7 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: oklch(var(--background));
   }
   ::-webkit-scrollbar-thumb {
     background: oklch(var(--primary));
