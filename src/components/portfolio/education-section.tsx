@@ -91,7 +91,7 @@ export function EducationSection({ education }: { education: Education[] }) {
                     </div>
 
                     {/* Year range */}
-                    <div className="shrink-0 text-xs text-muted-foreground bg-white/4 border border-white/8 rounded-lg px-3 py-1.5 font-medium tabular-nums">
+                    <div className="shrink-0 text-xs text-muted-foreground bg-foreground/4 border border-foreground/8 rounded-lg px-3 py-1.5 font-medium tabular-nums">
                       {edu.startYear} &mdash;{" "}
                       {edu.isCurrent
                         ? "Present"

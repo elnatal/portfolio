@@ -112,7 +112,7 @@ export function LanguagesSection({ languages }: { languages: Language[] }) {
                     ].map(({ label, value }) => (
                       <div
                         key={label}
-                        className="bg-white/4 border border-white/8 rounded-lg px-3 py-2.5 flex flex-col items-center gap-1 text-center"
+                        className="bg-foreground/4 border border-foreground/8 rounded-lg px-3 py-2.5 flex flex-col items-center gap-1 text-center"
                       >
                         <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                           {label}
@@ -125,7 +125,7 @@ export function LanguagesSection({ languages }: { languages: Language[] }) {
               ))}
 
               {/* CEFR legend */}
-              <p className="text-xs text-gray-600 pt-2 border-t border-white/5">
+              <p className="text-xs text-muted-foreground pt-2 border-t border-foreground/5">
                 Levels: A1–A2 Basic user &nbsp;·&nbsp; B1–B2 Independent user &nbsp;·&nbsp; C1–C2 Proficient user
               </p>
             </div>

@@ -94,13 +94,13 @@ export function ExperienceSection({
                       <div className="flex flex-wrap items-center gap-2 mt-1">
                         <Badge
                           variant="secondary"
-                          className="bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/20 text-xs"
+                          className="bg-primary/15 text-primary border border-primary/20 text-xs"
                         >
                           {exp.role}
                         </Badge>
                         <Badge
                           variant="outline"
-                          className="text-xs border-white/10 text-muted-foreground"
+                          className="text-xs border-foreground/10 text-muted-foreground"
                         >
                           {exp.type}
                         </Badge>
